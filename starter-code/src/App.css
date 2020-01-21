@@ -26,3 +26,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.BeerCard .card-img-top{
+  max-height: 20vh;
+  max-width: 10vw;
+}
