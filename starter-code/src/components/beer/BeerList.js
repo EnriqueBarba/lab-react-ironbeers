@@ -25,10 +25,11 @@ class BeerList extends React.Component {
 
 
     render () {
+        const beers = this.state.data.beers;
         return(
         <div className="BeerList">
             <Header />
-            {this.state.data.beers}
+            {beers}
         </div>
         )
     }

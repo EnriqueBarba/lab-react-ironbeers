@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../misc/Header'
 import BeerService from '../../services/BeerService'
-
+import BeerSingle from './BeerSingle'
 
 class BeerDetails extends React.Component {
 
@@ -26,17 +26,15 @@ class BeerDetails extends React.Component {
         return (
             <div className="BeerDetails">
                 <Header />
-                <div className="BeerCard card">
-                    <img className="card-img-top" src={b.image_url} alt="Pic" />
-                    <div className="card-body">
-                        <h5 className="card-title">{b.name}</h5>
-                        <p className="card-text">{b.tagline}</p>
-                        <p>{b.first_brewed}</p>
-                        <p><b>Attenuation level:</b>{b.attenuation_level}</p>
-                        <p>{b.description}</p>
-                        <p className="card-text"><b>Created by:</b> {b.contributed_by}</p>
-                    </div>
-                </div>
+                <BeerSingle 
+                    image_url={b.image_url}  
+                    name={b.name}  
+                    tagline={b.tagline}  
+                    first_brewed={b.first_brewed}  
+                    attenuation_level={b.attenuation_level}  
+                    description={b.description}  
+                    contributed_by={b.contributed_by} 
+                />
             </div>
 
         )
