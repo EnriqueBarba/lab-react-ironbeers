@@ -6,30 +6,23 @@ import BeerService from '../../services/BeerService'
 class BeerList extends React.Component {
 
     state = {
-        data: {
-            beers: []
-        }
+        beers:  []
     }
 
     componentDidMount() {
         BeerService.list().then( data => { 
-            const print = data.map((e,i) => <BeerCard key={i} {...e} />)
             this.setState({
-                data:{
-                    beers:[...print]
-                }
+                beers:data
             })
         })
     }
 
-
-
     render () {
-        const beers = this.state.data.beers;
+        const print = this.state.beers.map((e,i) => <BeerCard key={i} {...e} />)
         return(
         <div className="BeerList">
             <Header />
-            {beers}
+            {print}
         </div>
         )
     }
