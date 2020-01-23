@@ -6,15 +6,25 @@ import BeerService from '../../services/BeerService'
 class BeerList extends React.Component {
 
     state = {
-        beers:  []
+        beers: []
     }
 
     componentDidMount() {
-        BeerService.list().then( data => { 
-            this.setState({
-                beers:data
-            })
-        })
+        BeerService.list()
+            .then( data => { 
+                this.setState({
+                    beers:data
+                })
+            }).catch(console.error)
+    }
+
+    handleChange = (e) => {
+        BeerService.search(e.target.value)
+            .then( data => {
+                this.setState({
+                    beers: data
+                })
+            }).catch(console.error)
     }
 
     render () {
@@ -22,6 +32,8 @@ class BeerList extends React.Component {
         return(
         <div className="BeerList">
             <Header />
+            <label className="">Search: </label>
+            <input type="text" onChange={(e) => this.handleChange(e)} />
             {print}
         </div>
         )

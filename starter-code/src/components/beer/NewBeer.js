@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../misc/Header'
 import BeerServices from '../../services/BeerService'
+import { Redirect } from 'react-router-dom'
 
 const valid = {
     name: v => v.length > 5,
@@ -33,9 +34,8 @@ class NewBeer extends React.Component {
             attenuation_level: true,
             contributed_by: true
         },
-        touch:{
-
-        }
+        touch:{},
+        created: false
     }
 
     handleSubmit = (e) => {
@@ -44,6 +44,9 @@ class NewBeer extends React.Component {
         BeerServices.newBeer(body)
         .then(data =>{
             alert(data.message)
+            this.setState({
+                created:true
+            })
         }).catch(console.error)
     }
 
@@ -64,7 +67,7 @@ class NewBeer extends React.Component {
         this.setState({
             data:{
                 ...this.state.data,
-                [name]: name==='attenuation_level' ? Number(value) : value
+                [name]: value
             },
             error: {
                 ...this.state.error,
@@ -74,8 +77,13 @@ class NewBeer extends React.Component {
     }
 
     render() {
-        const {data,error,touch} = this.state
+        const {data,error,touch, created} = this.state
         const anyError = Object.values(error).some(x => x)
+
+        if (created) {
+            return <Redirect to="/beers"/>
+        }
+
         return (
             <div className="NewBeer">
                 <Header />
@@ -201,9 +209,6 @@ class NewBeer extends React.Component {
                     </div>
                     <button disabled={anyError} className="btn btn-primary" type="submit">ADD NEW</button>
                 </form>
-                <pre className="bg-light p-2">
-                {JSON.stringify(this.state, null, "  ")}
-                </pre>
             </div>
         )
     }
