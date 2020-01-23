@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from '../misc/Header'
 import BeerServices from '../../services/BeerService'
-import { Redirect } from 'react-router-dom'
 
 const valid = {
     name: v => v.length > 5,
@@ -45,7 +44,6 @@ class NewBeer extends React.Component {
         BeerServices.newBeer(body)
         .then(data =>{
             alert(data.message)
-            
         }).catch(console.error)
     }
 
